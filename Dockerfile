@@ -1,16 +1,20 @@
 FROM ruby:2.6.5
 
+# Debian Buster foi arquivado; a imagem antiga do Ruby ainda aponta para os repositorios ativos.
+RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g; s|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g; /buster-updates/d' /etc/apt/sources.list && \
+echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until
+
 # add nodejs and yarn dependencies for the frontend
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+RUN echo "deb [trusted=yes] https://deb.nodesource.com/node_12.x buster main" > /etc/apt/sources.list.d/nodesource.list && \
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 
 # Instala nossas dependencias
 RUN apt-get update && apt-get install -qq -y --no-install-recommends \
-nodejs yarn build-essential libpq-dev imagemagick git-all nano
+nodejs yarn build-essential libpq-dev postgresql-client imagemagick git-all nano
 
-# Instalar bundler
-RUN gem install bundler
+# Instalar bundler compativel com Ruby 2.6.5 e Gemfile.lock
+RUN gem install bundler -v 2.1.4
 
 # Seta nosso path
 ENV INSTALL_PATH /onebitexchange
