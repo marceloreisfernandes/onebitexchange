@@ -8,7 +8,7 @@ cotacao configurada nas credentials do Rails.
 
 - Ruby 2.6.5
 - Rails 6.0.3.3
-- PostgreSQL 12.2 via Docker
+- PostgreSQL 16 Alpine via Docker
 - Node 12 / Yarn
 - Webpacker 4
 
@@ -53,6 +53,9 @@ Para remover tambem os volumes locais de banco, gems e `node_modules`:
 ```bash
 docker compose down -v
 ```
+
+Ao trocar a versao principal do PostgreSQL usada pelo Compose, pode ser
+necessario recriar o volume local do banco com `docker compose down -v`.
 
 ## Banco de dados
 
