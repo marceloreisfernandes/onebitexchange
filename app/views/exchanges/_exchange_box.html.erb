@@ -1,35 +1,39 @@
-<div class='exchange_box col-sm-12'>
-  <div class='card'>
-
-    <div class='card-header text-center'>
-      Simule sua conversão
+<div class='exchange_box conversion-panel'>
+  <div class='conversion-card'>
+    <div class='conversion-header'>
+      <span>Simule sua conversão</span>
+      <small>Atualize moedas e valor para calcular</small>
     </div>
 
-    <div class='card-block bg-gradient-secondary'>
+    <div class='conversion-body'>
       <%= form_with url: "/convert", method: :get, id: 'exchange_form' do |f| %>
-        <div class='local_currency'>
-          <div class='form-group'>
-            <p class='title'>Moeda Local</p>
-          <%= f.select 'source_currency', options_for_select(currency_list, 'BRL'), {}, { class: 'form-control', id: 'source_currency' } %>
+        <div class='currency-grid'>
+          <div class='local_currency currency-section'>
+            <div class='form-group'>
+              <p class='title'>Moeda Local</p>
+              <%= f.select 'source_currency', options_for_select(currency_list, 'BRL'), {}, { class: 'form-control', id: 'source_currency' } %>
+            </div>
+
+            <div class='form-group'>
+              <p class='title'>Valor</p>
+              <%= f.number_field 'amount', id: 'amount', class: 'form-control', placeholder: 'Quantidade ($10)', step: 'any', required: true %>
+            </div>
           </div>
 
-          <div class='form-group'>
-          <%= f.number_field 'amount', id: 'amount', class: 'form-control', placeholder: 'Quantidade ($10)', step: 'any', required: true %>
+          <div class='destination_currency currency-section'>
+            <div class='form-group'>
+              <p class='title'>Moeda Pretendida</p>
+              <%= f.select 'target_currency', options_for_select(currency_list, 'EUR'), {}, { class: 'form-control', id: 'target_currency' } %>
+            </div>
+
+            <div class='form-group result-group'>
+              <p class='title'>Resultado</p>
+              <input type='text' id='result' name='result' class='form-control result-control' placeholder='Resultado' readonly>
+            </div>
           </div>
         </div>
 
-        <div class='destination_currency'>
-          <div class='form-group'>
-            <p class='title'>Moeda Pretendida</p>
-          <%= f.select 'target_currency', options_for_select(currency_list, 'EUR'), {}, { class: 'form-control', id: 'target_currency' } %>
-          </div>
-          <div class='form-group'>
-            <input type='text' id='result' name='result' class='form-control' placeholder='Resultado' readonly>
-          </div>
-        </div>
-        <div>
-          <%= f.submit "CONVERTER", class: 'btn btn-dark col-md-12' %>
-        </div>
+        <%= f.submit "CONVERTER", class: 'btn convert-button' %>
       <% end %>
     </div>
   </div>

@@ -1,25 +1,21 @@
-<div class='container'>
-  <div class='row main'>
-    <div class='col-lg-3 offset-lg-1 col-md-10 offset-md-1 exchange_box'>
-      <div class='row'>
-          <div class='col-md-8 offset-md-2 text-sm-center'>
-            <%= image_tag 'logo.png', class: 'img-fluid'%>
-          </div>
-      </div>
-​
-      <div class='row'>
-        <%= render 'exchange_box' %>
-      </div>
-    </div>
-​
-    <div class='col-lg-7 offset-lg-1 hidden-sm-down title-box d-none d-md-block'>
-      <div class='row'>
-        <h2 class='subtitle'>Converta facilmente suas Moedas</h2>
+<main class='exchange-page'>
+  <div class='exchange-overlay'></div>
+
+  <section class='exchange-shell container'>
+    <div class='exchange-hero'>
+      <div class='brand-panel'>
+        <%= image_tag 'logo.png', class: 'brand-logo img-fluid' %>
+
+        <div class='hero-copy'>
+          <p class='eyebrow'>Conversor de moedas</p>
+          <h1>Converta valores com clareza e rapidez.</h1>
+          <p class='hero-description'>
+            Simule cotações internacionais em uma experiência simples, direta e elegante.
+          </p>
+        </div>
       </div>
 
-      <div class='row'>
-        <h3 class='subtitle'>Para qualquer moeda no Mundo!</h3>
-      </div>
+      <%= render 'exchange_box' %>
     </div>
-  </div>
-</div>
+  </section>
+</main>
